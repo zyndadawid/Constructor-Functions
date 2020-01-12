@@ -23,9 +23,25 @@ Elf.prototype.attack = function() {
   return "attack with " + this.weapon;
 };
 
+Elf.prototype.build = function() {
+  /*
+ //When we put function inside the function THIS is not gonna work becouse it's referece to a window obj now
+
+ function building() {
+    return this.name + " builds a house";
+  }
+  building();*/
+  //Solution for function inside the function is to declare a var to THIS and then use this var
+  const self = this;
+  function building() {
+    return self.name + " builds a house";
+  }
+  return building();
+};
+
 // Here's where we create a objces that can use our prototype functions
 const peter = new Elf("Peter", "stones");
-console.log(peter.attack());
+console.log(peter.build());
 
 const sam = new Elf("Sam", "bow");
 console.log(sam.name + " " + sam.attack());
